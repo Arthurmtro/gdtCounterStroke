@@ -267,7 +267,7 @@ remote func spawn_players(pinfo, spawn_index):
 	if (spawn_index == -1):
 		spawn_index = network.players.size()
 	
-	if (get_tree().is_network_server() && pinfo.net_id != 1):
+	if (get_tree().is_network_server() && pinfo.net_id != 1): # Blue spaws
 		# We are on the server and the requested spawn does not belong to the server
 		# Iterate through the connected players
 		var s_index = 1      # Will be used as spawn index
@@ -282,6 +282,7 @@ remote func spawn_players(pinfo, spawn_index):
 				rpc_id(id, "spawn_players", pinfo, spawn_index)
 			
 			s_index += 1
+			
 	
 	print("Spawning actor for player ", pinfo.name, "(", pinfo.net_id, ") - ", spawn_index)
 	
@@ -291,7 +292,10 @@ remote func spawn_players(pinfo, spawn_index):
 	# Setup player customization (well, the color)
 	nactor.set_dominant_color(pinfo.char_color)
 	# And the actor position
-	nactor.position = $SpawnPoints.get_node(str(spawn_index)).position
+	if (pinfo.team_id == 1):
+		nactor.position = $SpawnPoints.get_node('b' + str(spawn_index)).position
+	elif (pinfo.team_id == 2):
+		nactor.position = $SpawnPoints.get_node('r' + str(spawn_index)).position
 	# If this actor does not belong to the server, change the node name and network master accordingly
 	if (pinfo.net_id != 1):
 		nactor.set_network_master(pinfo.net_id)
@@ -366,4 +370,3 @@ func _on_txtFakeLatency_value_changed(value):
 
 func _on_btClearFocus_pressed():
 	$HUD/btClearFocus.release_focus()
-

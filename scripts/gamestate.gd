@@ -5,6 +5,7 @@ signal snapshot_received(snapshot)    # Emitted as soon as an snapshot is fully 
 var player_info = {
 	name = "Player",                   # How this player will be shown within the GUI
 	net_id = 1,                        # By default everyone receives "server" ID
+	team_id = 1,
 	actor_path = "res://scenes/player.tscn",  # The class used to represent the player in the game world
 	char_color = Color(1, 1, 1),       # By default don't modulate the icon color
 }

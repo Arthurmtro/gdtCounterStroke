@@ -11,6 +11,9 @@ margin_left = 10.0
 margin_top = 150.0
 margin_right = 301.0
 margin_bottom = 310.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="PanelHost"]
 margin_left = 100.0
@@ -18,6 +21,9 @@ margin_top = 10.0
 margin_right = 185.0
 margin_bottom = 24.0
 text = "Create Server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label2" type="Label" parent="PanelHost"]
 margin_left = 10.0
@@ -25,12 +31,18 @@ margin_top = 30.0
 margin_right = 90.0
 margin_bottom = 44.0
 text = "Server name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="txtServerName" type="LineEdit" parent="PanelHost"]
 margin_left = 10.0
 margin_top = 44.0
 margin_right = 282.0
 margin_bottom = 68.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label3" type="Label" parent="PanelHost"]
 margin_left = 10.0
@@ -38,6 +50,9 @@ margin_top = 80.0
 margin_right = 50.0
 margin_bottom = 94.0
 text = "Port"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="txtServerPort" type="LineEdit" parent="PanelHost"]
 margin_left = 10.0
@@ -45,6 +60,9 @@ margin_top = 94.0
 margin_right = 72.0
 margin_bottom = 118.0
 text = "4546"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label4" type="Label" parent="PanelHost"]
 margin_left = 93.0
@@ -52,6 +70,9 @@ margin_top = 80.0
 margin_right = 201.0
 margin_bottom = 94.0
 text = "Max connections"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="txtMaxPlayers" type="SpinBox" parent="PanelHost"]
 margin_left = 93.0
@@ -61,6 +82,9 @@ margin_bottom = 118.0
 min_value = 2.0
 max_value = 16.0
 value = 6.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btCreate" type="Button" parent="PanelHost"]
 margin_left = 230.0
@@ -68,12 +92,18 @@ margin_top = 130.0
 margin_right = 283.0
 margin_bottom = 150.0
 text = "Create"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PanelJoin" type="Panel" parent="."]
 margin_left = 10.0
 margin_top = 316.0
 margin_right = 301.0
 margin_bottom = 426.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="PanelJoin"]
 margin_left = 110.0
@@ -81,6 +111,9 @@ margin_top = 10.0
 margin_right = 177.0
 margin_bottom = 24.0
 text = "Join Server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label2" type="Label" parent="PanelJoin"]
 margin_left = 8.0
@@ -88,6 +121,9 @@ margin_top = 30.0
 margin_right = 28.0
 margin_bottom = 44.0
 text = "IP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="txtJoinIP" type="LineEdit" parent="PanelJoin"]
 margin_left = 8.0
@@ -95,6 +131,9 @@ margin_top = 44.0
 margin_right = 110.0
 margin_bottom = 68.0
 text = "127.0.0.1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label3" type="Label" parent="PanelJoin"]
 margin_left = 130.0
@@ -102,6 +141,9 @@ margin_top = 30.0
 margin_right = 160.0
 margin_bottom = 44.0
 text = "Port"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="txtJoinPort" type="LineEdit" parent="PanelJoin"]
 margin_left = 130.0
@@ -109,6 +151,9 @@ margin_top = 44.0
 margin_right = 192.0
 margin_bottom = 68.0
 text = "4546"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btJoin" type="Button" parent="PanelJoin"]
 margin_left = 230.0
@@ -116,12 +161,18 @@ margin_top = 80.0
 margin_right = 283.0
 margin_bottom = 100.0
 text = "Join"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PanelPlayer" type="Panel" parent="."]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 300.0
 margin_bottom = 146.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="PanelPlayer"]
 margin_left = 10.0
@@ -129,12 +180,18 @@ margin_top = 6.0
 margin_right = 93.0
 margin_bottom = 20.0
 text = "Player name:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="txtPlayerName" type="LineEdit" parent="PanelPlayer"]
 margin_left = 10.0
 margin_top = 26.0
 margin_right = 280.0
 margin_bottom = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label2" type="Label" parent="PanelPlayer"]
 margin_left = 90.0
@@ -142,6 +199,9 @@ margin_top = 66.0
 margin_right = 130.0
 margin_bottom = 80.0
 text = "Color"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PlayerIcon" type="Sprite" parent="PanelPlayer"]
 position = Vector2( 40, 96 )
@@ -153,13 +213,31 @@ margin_top = 86.0
 margin_right = 148.0
 margin_bottom = 106.0
 color = Color( 1, 1, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="btDefaultColor" type="Button" parent="PanelPlayer"]
-margin_left = 90.0
+margin_left = 89.0
 margin_top = 106.0
-margin_right = 148.0
+margin_right = 147.0
 margin_bottom = 126.0
+disabled = true
 text = "Default"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btSelectTeam" type="OptionButton" parent="PanelPlayer"]
+margin_left = 156.279
+margin_top = 87.76
+margin_right = 295.279
+margin_bottom = 119.76
+text = "Select your Team"
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="PanelHost/btCreate" to="." method="_on_btCreate_pressed"]
 [connection signal="pressed" from="PanelJoin/btJoin" to="." method="_on_btJoin_pressed"]
 [connection signal="color_changed" from="PanelPlayer/btColor" to="." method="_on_btColor_color_changed"]

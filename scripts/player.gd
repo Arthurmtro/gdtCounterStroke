@@ -1,9 +1,9 @@
-extends Node2D
+extends KinematicBody2D
 
 
-var move_speed = 300
+export var move_speed = 300
+
 onready var current_time = 0         # Used to count input timeouts
-
 
 
 func _process(delta):
@@ -75,4 +75,3 @@ remote func server_get_player_input(input):
 #		yield(get_tree().create_timer(network.fake_latency / 1000), "timeout")
 #
 #	position = pos
-

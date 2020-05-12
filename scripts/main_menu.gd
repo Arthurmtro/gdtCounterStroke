@@ -6,13 +6,16 @@ func _ready():
 	network.connect("join_success", self, "_on_ready_to_play")
 	network.connect("join_fail", self, "_on_join_fail")
 	get_tree().paused = false
-
+	
+	# option Button
+	$PanelPlayer/btSelectTeam.add_item("Equipe blueu", 1)
+	$PanelPlayer/btSelectTeam.add_item("Equipe rouge", 2)
 
 func set_player_info():
 	if (!$PanelPlayer/txtPlayerName.text.empty()):
 		gamestate.player_info.name = $PanelPlayer/txtPlayerName.text
 	gamestate.player_info.char_color = $PanelPlayer/btColor.color
-
+	gamestate.player_info.team_id = $PanelPlayer/btSelectTeam.get_selected_id()
 
 func _on_btCreate_pressed():
 	# Properly set the local player information
@@ -26,6 +29,7 @@ func _on_btCreate_pressed():
 	
 	# And create the server, using the function previously added into the code
 	network.create_server()
+	print(gamestate.player_info)
 
 
 func _on_btJoin_pressed():
