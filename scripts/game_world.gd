@@ -292,6 +292,8 @@ remote func spawn_players(pinfo, spawn_index):
 	print("Spawning actor for player ", pinfo.name, "(", pinfo.net_id, ") - ", spawn_index)
 	
 	# Load the scene and create an instance
+	if (pinfo.team_id == 2):
+		pinfo.actor_path = "res://scenes/player2.tscn"
 	var pclass = load(pinfo.actor_path)
 	var nactor = pclass.instance()
 	# Setup player customization (well, the color)

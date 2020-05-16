@@ -26,7 +26,8 @@ func _process(delta):
 
 
 func set_dominant_color(color):
-	$icon.modulate = color
+	#$icon.modulate = color
+	pass
 
 
 func gather_input():
@@ -37,6 +38,12 @@ func gather_input():
 		right = Input.is_action_pressed("move_right"),
 		mouse_pos = get_global_mouse_position(),
 	}
+	
+	if (input_data.up or input_data.down or input_data.left or input_data.right):
+		$Anim.playing = true
+	else:
+		$Anim.playing = false
+		$Anim.frame = 6
 	
 	if (get_tree().is_network_server()):
 		# On the server, direcly cache the input data

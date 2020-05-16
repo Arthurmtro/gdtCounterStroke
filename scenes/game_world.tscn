@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/game_world.gd" type="Script" id=1]
 [ext_resource path="res://scenes/ui_chat.tscn" type="PackedScene" id=2]
@@ -21,9 +21,6 @@ light_mode = 1
 [sub_resource type="CanvasItemMaterial" id=4]
 blend_mode = 4
 light_mode = 1
-
-[sub_resource type="CircleShape2D" id=5]
-radius = 101.325
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource( 1 )
@@ -263,16 +260,5 @@ texture = ExtResource( 3 )
 [node name="PlayerRoot" parent="." instance=ExtResource( 5 )]
 visible = false
 position = Vector2( -67.3406, 228.356 )
-move_speed = 300
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2( -181.621, -64.2187 )
-input_pickable = false
-priority = 1.0
-collision_layer = 63
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 49.7422, 39.1909 )
-shape = SubResource( 5 )
 [connection signal="pressed" from="HUD/btClearFocus" to="." method="_on_btClearFocus_pressed"]
 [connection signal="value_changed" from="HUD/PanelFakeLatency/txtFakeLatency" to="." method="_on_txtFakeLatency_value_changed"]

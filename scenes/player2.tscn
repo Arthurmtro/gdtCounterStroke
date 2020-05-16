@@ -1,0 +1,54 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scripts/player.gd" type="Script" id=2]
+[ext_resource path="res://assets/light_mask.jpg" type="Texture" id=3]
+[ext_resource path="res://assets/Soldat/Walk/SW_07.png" type="Texture" id=4]
+[ext_resource path="res://assets/Soldat/Soldier.png" type="Texture" id=5]
+[ext_resource path="res://assets/Soldat/Walk/SW_02.png" type="Texture" id=6]
+[ext_resource path="res://assets/Soldat/Walk/SW_05.png" type="Texture" id=7]
+[ext_resource path="res://assets/Soldat/Walk/SW_01.png" type="Texture" id=8]
+[ext_resource path="res://assets/Soldat/Walk/SW_03.png" type="Texture" id=9]
+[ext_resource path="res://assets/Soldat/Walk/SW_04.png" type="Texture" id=10]
+[ext_resource path="res://assets/Soldat/Walk/SW_06.png" type="Texture" id=11]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 11 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "walk",
+"speed": 8.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 11.9954
+
+[node name="PlayerRoot" type="KinematicBody2D"]
+scale = Vector2( 2, 2 )
+z_as_relative = false
+script = ExtResource( 2 )
+
+[node name="Anim" type="AnimatedSprite" parent="."]
+rotation = -1.5708
+frames = SubResource( 1 )
+animation = "walk"
+frame = 6
+
+[node name="torso" type="Sprite" parent="."]
+rotation = 1.5708
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 3
+shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+light_mask = 32
+
+[node name="light" type="Light2D" parent="Camera2D"]
+position = Vector2( -89.3681, 97.5035 )
+texture = ExtResource( 3 )
+texture_scale = 13.37
+energy = 0.5
+range_layer_max = 15
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
