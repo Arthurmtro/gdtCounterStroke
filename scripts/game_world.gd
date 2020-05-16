@@ -9,6 +9,7 @@ extends Node2D
 var player_row = {}
 onready var current_time = 0
 var from_to = {}
+var move_dir = Vector2()
 
 func _ready():
 	# Connect event handler to the player_list_changed signal
@@ -67,6 +68,8 @@ func _process(delta):
 	
 	# And update the game state
 	update_state()
+	
+	
 
 
 # Update and generate a game state snapshot. 
@@ -93,6 +96,7 @@ func update_state():
 			continue
 		
 		var p_pos = player_node.position
+		var p = player_node
 		var p_rot = player_node.rotation
 		
 		# Check if there is any input for this player. In that case, update the state
@@ -102,8 +106,8 @@ func update_state():
 			
 			# Now, for each input entry, calculate the resulting state
 			for input in gamestate.player_input[p_id]:
-				# Build the movement direction vector based on the input
 				var move_dir = Vector2()
+				# Build the movement direction vector based on the input
 				if (input.up):
 					move_dir.y -= 1
 				if (input.down):
@@ -114,11 +118,12 @@ func update_state():
 					move_dir.x += 1
 				
 				# Update the position
-				p_pos += move_dir.normalized() * player_node.move_speed * delta
+				p_pos += p.move_and_slide(move_dir.normalized() * player_node.move_speed * delta)
 				# And rotation
 				p_rot = p_pos.angle_to_point(input.mouse_pos)
 			
 			# Cleanup the input vector
+			#move_dir = p.move_and_slide(p_pos)
 			gamestate.player_input[p_id].clear()
 		
 		# Build player_data entry

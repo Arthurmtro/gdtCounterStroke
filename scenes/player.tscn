@@ -4,12 +4,11 @@
 [ext_resource path="res://scripts/player.gd" type="Script" id=2]
 [ext_resource path="res://assets/light_mask.jpg" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 18.9236, 18.9383 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 23.4999
 
 [node name="PlayerRoot" type="KinematicBody2D"]
 z_as_relative = false
-collision_layer = 7
 script = ExtResource( 2 )
 
 [node name="icon" type="Sprite" parent="."]
@@ -18,14 +17,14 @@ scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+light_mask = 3
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 light_mask = 32
 
 [node name="light" type="Light2D" parent="Camera2D"]
-position = Vector2( 0.527039, 1.26352 )
+position = Vector2( -99.934, 88.0697 )
 texture = ExtResource( 3 )
 texture_scale = 13.37
 energy = 0.5
