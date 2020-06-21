@@ -7,9 +7,11 @@ func _ready():
 	network.connect("join_fail", self, "_on_join_fail")
 	get_tree().paused = false
 	
+	$AudioStreamPlayer2D.play()
+	
 	# option Button
-	$PanelPlayer/btSelectTeam.add_item("Equipe blueu", 1)
-	$PanelPlayer/btSelectTeam.add_item("Equipe rouge", 2)
+	$PanelPlayer/btSelectTeam.add_item("GIGN", 1)
+	$PanelPlayer/btSelectTeam.add_item("Army", 2)
 
 func set_player_info():
 	if (!$PanelPlayer/txtPlayerName.text.empty()):
@@ -57,3 +59,12 @@ func _on_btDefaultColor_pressed():
 	$PanelPlayer/PlayerIcon.modulate = Color(1, 1, 1)
 	$PanelPlayer/btColor.color = Color(1, 1, 1)
 
+
+
+func _on_btSelectTeam_item_selected(id):
+	if (id == 0) :
+		$PanelPlayer/PlayerIcon.visible = true
+		$PanelPlayer/PlayerIcon2.visible = false
+	else :
+		$PanelPlayer/PlayerIcon.visible = false
+		$PanelPlayer/PlayerIcon2.visible = true

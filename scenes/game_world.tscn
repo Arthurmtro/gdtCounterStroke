@@ -1,26 +1,87 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://scripts/game_world.gd" type="Script" id=1]
 [ext_resource path="res://scenes/ui_chat.tscn" type="PackedScene" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://tilesets/tileset01.tres" type="TileSet" id=4]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/HUD/CHARACTER HUD/HP ARMOR AMMO HUD.png" type="Texture" id=6]
+[ext_resource path="res://assets/HUD/WEAPON ICONS/Pistol HUD.png" type="Texture" id=7]
+[ext_resource path="res://assets/HUD/WEAPON ICONS/Flamethrower HUD.png" type="Texture" id=8]
+[ext_resource path="res://assets/HUD/WEAPON ICONS/MG HUD.png" type="Texture" id=9]
+[ext_resource path="res://assets/HUD/CHARACTER HUD/HP Icon.png" type="Texture" id=10]
+[ext_resource path="res://assets/Settings/Bar BG.png" type="Texture" id=11]
+[ext_resource path="res://assets/Settings/Bar.png" type="Texture" id=12]
+[ext_resource path="res://assets/HUD/CHARACTER HUD/Armor.png" type="Texture" id=13]
+[ext_resource path="res://assets/HUD/CHARACTER HUD/Ammo Icon.png" type="Texture" id=14]
+[ext_resource path="res://assets/Settings/Settings BG.png" type="Texture" id=15]
+[ext_resource path="res://assets/Settings/Description Area.png" type="Texture" id=16]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 4
 light_mode = 1
 
+[sub_resource type="StyleBoxTexture" id=16]
+texture = ExtResource( 15 )
+region_rect = Rect2( 0, 0, 111, 231 )
+
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 4
 light_mode = 1
+
+[sub_resource type="StyleBoxTexture" id=17]
+texture = ExtResource( 16 )
+region_rect = Rect2( 0, 0, 103, 58 )
 
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 4
 light_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id=4]
-blend_mode = 4
-light_mode = 1
+[sub_resource type="ShaderMaterial" id=18]
+
+[sub_resource type="StyleBoxTexture" id=11]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 178, 72 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 79, 46 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 79, 46 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 79, 46 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="StyleBoxTexture" id=10]
+texture = ExtResource( 10 )
+region_rect = Rect2( 0, 0, 15, 14 )
+
+[sub_resource type="StyleBoxTexture" id=12]
+texture = ExtResource( 12 )
+region_rect = Rect2( 0, 0, 28, 7 )
+
+[sub_resource type="StyleBoxTexture" id=13]
+texture = ExtResource( 11 )
+region_rect = Rect2( 0, 0, 28, 7 )
+
+[sub_resource type="StyleBoxTexture" id=14]
+texture = ExtResource( 14 )
+region_rect = Rect2( 0, 0, 11, 8 )
+
+[sub_resource type="StyleBoxTexture" id=15]
+texture = ExtResource( 13 )
+region_rect = Rect2( 0, 0, 15, 16 )
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource( 1 )
@@ -33,42 +94,61 @@ self_modulate = Color( 1, 1, 1, 0 )
 use_parent_material = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2.05054
-margin_top = 18.4549
-margin_right = 14.0505
-margin_bottom = 38.4549
+margin_left = 1.24555
+margin_top = 20.3574
+margin_right = 13.2456
+margin_bottom = 40.3574
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PanelPlayerList" type="Panel" parent="HUD"]
-visible = false
 self_modulate = Color( 1, 1, 1, 0.486275 )
 show_behind_parent = true
 material = SubResource( 1 )
-margin_left = 105.0
-margin_top = 65.0
-margin_right = 918.0
-margin_bottom = 462.0
+margin_left = 106.292
+margin_top = 145.126
+margin_right = 919.292
+margin_bottom = 542.126
+custom_styles/panel = SubResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="lblLocalPlayer" type="Label" parent="HUD/PanelPlayerList"]
-margin_left = 28.0
-margin_top = 18.0
-margin_right = 783.0
-margin_bottom = 40.0
+margin_left = 37.0465
+margin_top = 67.1096
+margin_right = 792.047
+margin_bottom = 89.1096
 text = "LocalPlayerName"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="boxList" type="VBoxContainer" parent="HUD/PanelPlayerList"]
+[node name="boxListRed" type="VBoxContainer" parent="HUD/PanelPlayerList"]
 margin_left = 25.0
-margin_top = 35.0
+margin_top = 92.0
+margin_right = 772.0
+margin_bottom = 205.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="boxListBlue" type="VBoxContainer" parent="HUD/PanelPlayerList"]
+margin_left = 25.0
+margin_top = 211.0
 margin_right = 772.0
 margin_bottom = 355.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/PanelPlayerList"]
+margin_left = 32.3171
+margin_top = 19.6537
+margin_right = 152.317
+margin_bottom = 47.6537
+text = "Players Names"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -77,23 +157,27 @@ __meta__ = {
 self_modulate = Color( 1, 1, 1, 0 )
 show_behind_parent = true
 material = SubResource( 2 )
-margin_left = 450.0
-margin_top = 10.0
-margin_right = 600.0
-margin_bottom = 50.0
+margin_left = 453.492
+margin_top = 11.3967
+margin_right = 603.492
+margin_bottom = 48.3967
+custom_styles/panel = SubResource( 17 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="lblServerName" type="Label" parent="HUD/PanelServerInfo"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = 11.8718
+margin_top = 3.4917
+margin_right = 89.8718
+margin_bottom = 17.4917
 text = "ServerName"
 
 [node name="lblPing" type="Label" parent="HUD/PanelServerInfo"]
-margin_top = 14.0
-margin_right = 40.0
-margin_bottom = 28.0
+margin_left = 12.5701
+margin_top = 16.7934
+margin_right = 52.5701
+margin_bottom = 30.7934
 text = "Ping: -"
 
 [node name="PanelFakeLatency" type="Panel" parent="HUD"]
@@ -122,12 +206,112 @@ max_value = 2000.0
 
 [node name="ChatRoot" parent="HUD" instance=ExtResource( 2 )]
 light_mask = 0
-material = SubResource( 4 )
+material = SubResource( 18 )
 use_parent_material = true
 margin_left = 10.0
 margin_top = 300.0
 margin_right = 260.0
 margin_bottom = 590.0
+
+[node name="PanelPlayer" type="Panel" parent="HUD"]
+margin_left = 20.1232
+margin_top = 8.07394
+margin_right = 343.123
+margin_bottom = 138.074
+custom_styles/panel = SubResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EquipedWeapon" type="Node2D" parent="HUD/PanelPlayer"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="HUD/PanelPlayer/EquipedWeapon"]
+position = Vector2( 43.8871, 61.0255 )
+scale = Vector2( 1.30769, 1.27508 )
+frames = SubResource( 9 )
+
+[node name="Label" type="Label" parent="HUD/PanelPlayer/EquipedWeapon"]
+margin_left = 105.003
+margin_top = 91.9936
+margin_right = 124.003
+margin_bottom = 105.994
+text = "12"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="slash" type="Label" parent="HUD/PanelPlayer/EquipedWeapon"]
+margin_left = 121.421
+margin_top = 97.9572
+margin_right = 133.421
+margin_bottom = 111.957
+text = "/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="HUD/PanelPlayer/EquipedWeapon"]
+margin_left = 122.294
+margin_top = 102.569
+margin_right = 145.294
+margin_bottom = 116.569
+text = "12"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelHp" type="Panel" parent="HUD/PanelPlayer"]
+margin_left = 157.673
+margin_top = 43.9903
+margin_right = 185.673
+margin_bottom = 67.9903
+custom_styles/panel = SubResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD/PanelPlayer/PanelHp"]
+margin_left = 36.6984
+margin_top = 1.00974
+margin_right = 154.698
+margin_bottom = 21.0097
+custom_styles/fg = SubResource( 12 )
+custom_styles/bg = SubResource( 13 )
+value = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelAmo" type="Panel" parent="HUD/PanelPlayer"]
+margin_left = 68.0147
+margin_top = 87.1147
+margin_right = 91.0147
+margin_bottom = 110.115
+custom_styles/panel = SubResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelArmor" type="Panel" parent="HUD/PanelPlayer"]
+margin_left = 160.0
+margin_top = 84.2262
+margin_right = 186.0
+margin_bottom = 111.226
+custom_styles/panel = SubResource( 15 )
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD/PanelPlayer/PanelArmor"]
+margin_left = 34.3715
+margin_top = 3.33189
+margin_right = 152.372
+margin_bottom = 23.3319
+custom_styles/fg = SubResource( 12 )
+custom_styles/bg = SubResource( 13 )
+value = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 
@@ -246,7 +430,7 @@ tile_data = PoolIntArray( -524283, 4, 0, -524282, 4, 0, -524281, 4, 0, -524280, 
 [node name="icon3" type="Sprite" parent="."]
 modulate = Color( 0.576471, 0.517647, 0.980392, 1 )
 self_modulate = Color( 1, 1, 1, 0.258824 )
-position = Vector2( 128.937, 276.298 )
+position = Vector2( 116.302, 343.986 )
 scale = Vector2( 2.46023, 6.27568 )
 texture = ExtResource( 3 )
 

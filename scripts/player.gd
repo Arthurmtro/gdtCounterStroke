@@ -23,7 +23,24 @@ func _process(delta):
 	
 	if (is_network_master() && gamestate.accept_player_input):
 		gather_input()
+		
+	if (Input.is_action_pressed("fire")) :
+		fire()
+	
+var shotscene = preload("res://scenes/bullet.tscn")
+var shotspeed = 1000.0
 
+func fire():
+	var direction = Vector2()
+	var shot = shotscene.instance()
+	var shotvect = ($shotpoint.get_global_position() - get_global_position()).normalized()
+	self.add_child(shot)
+	shot.set_global_position(get_node("shotpoint").get_global_position())
+	shot.set_linear_velocity(shotvect * shotspeed) # if your shot is a rigidbody
+	
+
+	 # If your shot is not a rigidbody and handles movement itself, set a velocity var 
+	 # on the shot before you add it to the scene so its ready() function fires after it is set. 
 
 func set_dominant_color(color):
 	#$icon.modulate = color

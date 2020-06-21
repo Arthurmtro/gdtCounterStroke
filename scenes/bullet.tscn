@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/Hero/Effects/Pistol Shot/1.png" type="Texture" id=1]
+[ext_resource path="res://assets/Hero/Effects/Pistol Shot/2.png" type="Texture" id=2]
+[ext_resource path="res://assets/Hero/Effects/Pistol Shot/3.png" type="Texture" id=3]
+[ext_resource path="res://scenes/bullet.gd" type="Script" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 6.45728
+height = 8.03967
+
+[node name="Bullet" type="RigidBody2D"]
+mass = 0.00102041
+gravity_scale = 0.0
+custom_integrator = true
+can_sleep = false
+script = ExtResource( 4 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+rotation = -1.5708
+scale = Vector2( 2, 2 )
+frames = SubResource( 4 )
+frame = 2
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.836243, 0.836243 )
+shape = SubResource( 5 )

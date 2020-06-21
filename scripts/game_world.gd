@@ -35,10 +35,8 @@ func _ready():
 	# Spawn the players
 	if (get_tree().is_network_server()):
 		spawn_players(gamestate.player_info, 1)
-		sync_bots(-1)    # The amount doesn't matter because it will be calculated in the function body
 	else:
 		rpc_id(1, "spawn_players", gamestate.player_info, -1)
-		rpc_id(1, "sync_bots", -1)
 
 
 func _process(delta):
@@ -136,29 +134,15 @@ func update_state():
 		# Append into the snapshot
 		snapshot.player_data.append(pdata_entry)
 	
-	for b_id in range(gamestate.spawned_bots):
-		# Locate the bot node
-		var bot_node = get_node(gamestate.bot_info[b_id + 1].name)
-		if (!bot_node):
-			# Must give a warning here
-			continue
-		
-		# Build bot_data entry
-		var bdata_entry = {
-			bot_id = b_id + 1,
-			location = bot_node.position,
-			rot = bot_node.rotation,
-			col = bot_node.color,
-		}
-		# Append into the snapshot
-		snapshot.bot_data.append(bdata_entry)
-	
 	# Encode and broadcast the snapshot - if there is at least one connected client
 	if (network.players.size() > 1):
 		gamestate.encode_snapshot(snapshot)
 	apply_snapshot(snapshot)
 	# Make sure the next update will have the correct snapshot signature
 	gamestate.snapshot_signature += 1
+	
+	# Update amount of Ammo of the player
+	$HUD/PanelPlayer/EquipedWeapon/Label.set_text(str(gamestate.player_info.ammo))
 
 
 func apply_snapshot(snapshot):
@@ -220,7 +204,9 @@ func _on_player_list_changed():
 	$HUD/PanelServerInfo/lblServerName.text = "Server: " + network.server_info.name
 	
 	# First remove all children from the boxList widget
-	for c in $HUD/PanelPlayerList/boxList.get_children():
+	for c in $HUD/PanelPlayerList/boxListBlue.get_children():
+		c.queue_free()
+	for c in $HUD/PanelPlayerList/boxListRed.get_children():
 		c.queue_free()
 	
 	# Reset the row dictionary
@@ -236,15 +222,18 @@ func _on_player_list_changed():
 			nentry.net_id = p
 			nentry.set_info(network.players[p].name, network.players[p].char_color)
 			nentry.connect("whisper_clicked", $HUD/ChatRoot, "_on_whisper")
-			$HUD/PanelPlayerList/boxList.add_child(nentry)
-			player_row[network.players[p].net_id] = nentry
+			if (gamestate.player_info.team_id == 2) :
+				$HUD/PanelPlayerList/boxListBlue.add_child(nentry)
+				player_row[network.players[p].net_id] = nentry
+			else :
+				$HUD/PanelPlayerList/boxListRed.add_child(nentry)
+				player_row[network.players[p].net_id] = nentry
 
 
 func _on_player_removed(pinfo):
 	gamestate.player_input.erase(pinfo.net_id)
 	from_to.erase(pinfo.net_id)
 	despawn_player(pinfo)
-	sync_bots(-1)       # Again, amount doesn't matter at this point because the server side section will take care of it
 
 
 func _on_disconnected():
@@ -332,43 +321,6 @@ remote func despawn_player(pinfo):
 	
 	# Mark the node for deletion
 	player_node.queue_free()
-
-
-remote func sync_bots(bot_count):
-	if (network.fake_latency > 0):
-		yield(get_tree().create_timer(network.fake_latency / 1000), "timeout")
-	
-	if (get_tree().is_network_server()):
-		# Calculate the target amount of spawned bots
-		bot_count = network.server_info.max_players - network.players.size()
-		# Relay this to the connected players
-		rpc("sync_bots", bot_count)
-	
-	if (gamestate.spawned_bots > bot_count):
-		# We have more bots than the target count - must remove some
-		while (gamestate.spawned_bots > bot_count):
-			# Locate the bot's node
-			var bnode = get_node(gamestate.bot_info[gamestate.spawned_bots].name)
-			if (!bnode):
-				print("Must remove bots from game but cannot find it's node")
-				return
-			# Mark it for removal
-			bnode.queue_free()
-			# And update the spawned bot count
-			gamestate.spawned_bots -= 1
-	
-	elif (gamestate.spawned_bots < bot_count):
-		# We have less bots than the target count - must add some
-		# Since every single bot uses the exact same scene path we can cahce it's loaded scene here
-		# otherwise, we would have to move the following code into the while loop and change the dictionary
-		# key ID to point into the correct bot info. In this case we are pointing to the 1
-		var bot_class = load(gamestate.bot_info[1].actor_path)
-		
-		while (gamestate.spawned_bots < bot_count):
-			var nbot = bot_class.instance()
-			nbot.set_name(gamestate.bot_info[gamestate.spawned_bots+1].name)
-			add_child(nbot)
-			gamestate.spawned_bots += 1
 
 
 func _on_txtFakeLatency_value_changed(value):

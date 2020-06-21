@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Cs-GO Theme Song - Shitty Fluted (ORIGINAL).wav-8f070754d2d1287e37d5a5fa7b2ac441.sample"
+
+[deps]
+
+source_file="res://assets/song/Cs-GO Theme Song - Shitty Fluted (ORIGINAL).wav"
+dest_files=[ "res://.import/Cs-GO Theme Song - Shitty Fluted (ORIGINAL).wav-8f070754d2d1287e37d5a5fa7b2ac441.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

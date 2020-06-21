@@ -8,6 +8,7 @@ var player_info = {
 	team_id = 1,
 	actor_path = "res://scenes/player.tscn",  # The class used to represent the player in the game world
 	char_color = Color(1, 1, 1),       # By default don't modulate the icon color
+	ammo = 0,                      # Amount of Ammo on the current weapon
 }
 
 var spawned_bots = 0
@@ -40,9 +41,6 @@ var player_input = {}
 func _ready():
 	randomize()
 	
-	# Initialize the bot list
-	for id in range(1, 16):
-		bot_info[id] = { name = "Bot_" + str(id), actor_path = "res://scenes/bot.tscn" }
 
 
 func set_update_rate(r):
